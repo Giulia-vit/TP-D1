@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.rc('font',family='serif')
 
 # Carica i dati da un file Excel, saltando le righe iniziali
 df = pd.read_excel('natalia-giulia-acier1.xlsx', skiprows=52)
@@ -30,14 +31,16 @@ y_fit = modello(x_fit, A, B, C)
 # Plot
 plt.figure(figsize=(8, 5))
 plt.plot(x, y_offset, label='Tension', color='royalblue')
-plt.plot(x_fit, y_fit, label=(
+plt.plot(x_fit, y_fit,  linestyle='--', label=(
     fr'Fit: $y = ({A:.1f} \pm {A_err:.1f}) \cdot e^{{({B*1e3:.1f} \pm {B_err*1e3:.1f}) \cdot 10^{{-3}} x}} + {C:.1f}$'
 ), color='red')
 
 # Mostra le incertezze in legenda o nel titolo
-plt.xlabel('t [s]')
-plt.ylabel('U [V]')
-plt.legend()
+plt.tick_params(axis='both', labelsize=14)
+plt.xlabel('t [s]', fontsize=15)
+plt.ylabel('U [V]', fontsize=15)
+plt.legend(fontsize=14)
 plt.grid(True)
 plt.tight_layout()
+plt.savefig('exp_acier.png')
 plt.show()
